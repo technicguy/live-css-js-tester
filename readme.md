@@ -1,266 +1,132 @@
-# Live CSS & JS Tester Chrome Extension
+# ⚡ Live CSS & JS Tester — Chrome Extension
 
-A powerful Chrome extension for web developers and designers that allows you to test CSS and JavaScript code live on any website with pin functionality and auto-apply features after page refresh.
+**Live CSS & JS Tester** is a lightweight, high-performance Chrome Extension (Manifest V3) designed for web developers, UI/UX designers, and QA engineers to test, inject, and execute custom CSS and JavaScript live on any website in real-time.
 
-## Features
-
-### 🎨 CSS Tab
-- **Live CSS Testing**: Write and test CSS code in real-time
-- **Auto-apply on typing**: CSS changes apply automatically as you type (with debouncing)
-- **Pin functionality**: Pin your CSS to auto-apply on every page refresh
-- **Enable/Disable toggle**: Quickly turn CSS live mode on/off
-- **Syntax highlighting**: Clean code editor with monospace font
-
-### ⚡ JavaScript Tab
-- **Live JavaScript Testing**: Execute JavaScript code on the current page
-- **Console output**: See console.log, errors, and warnings in the extension
-- **Pin functionality**: Pin your JavaScript to auto-execute on every page refresh
-- **Enable/Disable toggle**: Control when JavaScript executes
-- **Error handling**: Comprehensive error catching and display
-
-### 🔧 General Features
-- **Domain-specific settings**: Each website remembers its own code and settings
-- **Persistent storage**: Your code and preferences are saved automatically
-- **Visual feedback**: Status updates and timestamps for all actions
-- **Clean UI**: Modern, responsive design with smooth animations
-- **Badge indicators**: Extension icon shows active pinned code status
-
-## Installation
-
-### Option 1: Install from Chrome Web Store (Recommended)
-*Coming soon - extension will be published to the Chrome Web Store*
-
-### Option 2: Manual Installation (Developer Mode)
-
-1. **Download the Extension Files**
-   - Download all the files from this repository
-   - Create a new folder called `live-css-js-tester`
-   - Place all files in this folder
-
-2. **Required Files Structure**
-   ```
-   live-css-js-tester/
-   ├── manifest.json
-   ├── popup.html
-   ├── popup.css
-   ├── popup.js
-   ├── content.js
-   ├── background.js
-   ├── icons/
-   │   ├── icon16.png
-   │   ├── icon32.png
-   │   ├── icon48.png
-   │   └── icon128.png
-   └── README.md
-   ```
-
-3. **Create Extension Icons**
-   - Create an `icons` folder
-   - Add icon files in PNG format (16x16, 32x32, 48x48, 128x128 pixels)
-   - You can use any icon design tool or download free developer icons online
-
-4. **Enable Developer Mode in Chrome**
-   - Open Chrome and go to `chrome://extensions/`
-   - Toggle on "Developer mode" in the top-right corner
-
-5. **Load the Extension**
-   - Click "Load unpacked" button
-   - Select the `live-css-js-tester` folder
-   - The extension will be installed and appear in your extensions list
-
-6. **Pin the Extension (Optional)**
-   - Click the puzzle piece icon in Chrome toolbar
-   - Find "Live CSS & JS Tester" and click the pin icon
-
-## Usage Guide
-
-### Getting Started
-1. Click the extension icon in your Chrome toolbar
-2. The popup will show the current website's domain
-3. Choose between CSS and JavaScript tabs
-
-### CSS Testing
-1. **Switch to CSS tab**
-2. **Enable live mode** (enabled by default)
-3. **Write your CSS** in the editor
-4. **See changes immediately** on the webpage
-5. **Pin your CSS** to auto-apply after refresh
-6. **Use Apply CSS button** for manual application
-
-**Example CSS:**
-```css
-/* Change background color */
-body {
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4) !important;
-}
-
-/* Highlight all links */
-a {
-    background-color: yellow !important;
-    padding: 2px 4px !important;
-    border-radius: 3px !important;
-}
-```
-
-### JavaScript Testing
-1. **Switch to JavaScript tab**
-2. **Enable live mode** (enabled by default)
-3. **Write your JavaScript** in the editor
-4. **Click "Run JavaScript"** to execute
-5. **Check console output** below the editor
-6. **Pin your JS** to auto-execute after refresh
-
-**Example JavaScript:**
-```javascript
-// Add a floating message
-const message = document.createElement('div');
-message.innerHTML = 'Hello from Live JS Tester!';
-message.style.cssText = `
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #4CAF50;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    z-index: 9999;
-`;
-document.body.appendChild(message);
-
-// Log to console
-console.log('JavaScript executed successfully!');
-
-// Remove message after 5 seconds
-setTimeout(() => message.remove(), 5000);
-```
-
-### Pin Functionality
-- **Pin your code** using the toggle switches
-- **Pinned code automatically applies** when you refresh the page or navigate
-- **Each domain remembers** its own pinned code
-- **Badge indicator** shows which sites have pinned code (CSS, JS, or both)
-
-### Enable/Disable Toggles
-- **CSS Live**: Controls whether CSS applies as you type
-- **JS Live**: Controls whether JavaScript is in live mode
-- **Pin toggles**: Controls auto-application after refresh
-
-## Tips and Best Practices
-
-### CSS Tips
-- Use `!important` to override existing styles when needed
-- Test responsive designs by resizing the browser window
-- Use CSS transitions for smooth effects
-- Be careful with `position: fixed` elements
-
-### JavaScript Tips
-- Always test your code before pinning it
-- Use `console.log()` to debug your scripts
-- Be mindful of page load timing when using pinned JS
-- Avoid infinite loops that could crash the browser
-
-### Performance Tips
-- Keep CSS and JS code lightweight
-- Use debouncing for expensive operations
-- Clear unused code to avoid memory leaks
-- Test on different websites to ensure compatibility
-
-## Keyboard Shortcuts
-
-- **Ctrl/Cmd + Enter**: Apply CSS or run JavaScript
-- **Tab**: Switch between CSS and JS tabs (when popup is focused)
-- **Ctrl/Cmd + K**: Clear current editor
-
-## Troubleshooting
-
-### Common Issues
-
-**Extension not working on some sites:**
-- Some sites have strict Content Security Policy (CSP)
-- Chrome extensions pages (chrome://) are restricted
-- Try on different websites
-
-**CSS not applying:**
-- Check if live mode is enabled
-- Verify CSS syntax is correct
-- Try using `!important` for specificity
-- Clear the CSS and reapply
-
-**JavaScript not executing:**
-- Check console output for errors
-- Verify JavaScript syntax
-- Make sure live mode is enabled
-- Try simpler code first
-
-**Pinned code not auto-applying:**
-- Check if pin toggle is enabled
-- Refresh the page completely
-- Verify the domain settings are correct
-
-### Reset Extension
-To reset all extension data:
-1. Go to `chrome://extensions/`
-2. Find "Live CSS & JS Tester"
-3. Click "Remove" and reinstall
-4. Or clear browser storage data
-
-## Privacy & Security
-
-### Data Storage
-- All code and settings are stored locally in your browser
-- No data is sent to external servers
-- Each website's settings are stored separately
-- Data persists until you clear browser storage or uninstall
-
-### Security Features
-- Code execution is sandboxed within the browser
-- CSS and JS are applied only to the current tab
-- No access to sensitive browser data
-- No network requests made by the extension
-
-### Permissions Explained
-- **activeTab**: Access current webpage to apply CSS/JS
-- **storage**: Save your code and settings locally
-- **scripting**: Execute CSS and JS on webpages
-
-## Contributing
-
-We welcome contributions! Here's how you can help:
-
-1. **Report bugs** by creating GitHub issues
-2. **Suggest features** for future updates
-3. **Submit pull requests** with improvements
-4. **Share feedback** on user experience
-
-### Development Setup
-1. Clone this repository
-2. Make your changes
-3. Test thoroughly on multiple websites
-4. Submit a pull request with detailed description
-
-## Version History
-
-### v1.0.0 (Current)
-- Initial release
-- CSS and JavaScript live testing
-- Pin functionality with auto-apply
-- Domain-specific settings
-- Console output for JavaScript
-- Modern UI with animations
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Support
-
-For support, bug reports, or feature requests:
-- Create an issue on GitHub
-- Email: [your-email@example.com]
-- Documentation: [GitHub Wiki link]
+![Manifest V3](https://img.shields.io/badge/Manifest-V3-00fff2?style=for-the-badge)
+![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
 ---
 
-**Happy coding! 🚀**
+## 📑 Table of Contents
+- [Key Features](#-key-features)
+- [Architecture & Manifest V3 Specs](#-architecture--manifest-v3-specs)
+- [Installation Guide](#-installation-guide)
+- [How to Use](#-how-to-use)
+- [Domain-Specific Memory & Storage](#-domain-specific-memory--storage)
+- [Project File Structure](#-project-file-structure)
+- [Permissions & Privacy](#-permissions--privacy)
+- [License](#-license)
 
-*Made with ❤️ for web developers and designers*
+---
+
+## ✨ Key Features
+
+### 🎨 Live CSS Injection
+- **Real-Time Style Preview:** CSS rules apply instantly as you type (debounced to prevent layout thrashing).
+- **Pin & Auto-Apply:** Pin your custom CSS to automatically re-inject it whenever you refresh or revisit the domain.
+- **Global Toggle Switch:** Easily disable or enable custom styles with a single click.
+
+### ⚡ Live JavaScript Execution
+- **Instant Script Runner:** Execute custom JS code within the current tab's active DOM context.
+- **Embedded Console Output Log:** Captures and displays `console.log`, warnings, and runtime errors directly in the popup UI.
+- **Script Pinning:** Auto-execute specific scripts on page load for particular domains.
+
+### 🧠 Domain-Specific Memory
+- **Automatic Per-Domain Saving:** Keeps separate CSS/JS snippets for `github.com`, `google.com`, `localhost`, etc.
+- **Active Badge Status:** Updates the extension toolbar icon with badge indicators showing if pinned code is currently active on the site.
+
+---
+
+## 💻 Architecture & Manifest V3 Specs
+
+| Specification | Value / Technology |
+| :--- | :--- |
+| **Manifest Version** | `Manifest V3` |
+| **Service Worker** | `background.js` (Manages badge updates & storage state) |
+| **Content Script** | `content.js` (Injected at `document_start` for instant style application) |
+| **Popup UI** | HTML5 + CSS3 + Monospaced Code Editor (`popup.html`, `popup.css`, `popup.js`) |
+| **Storage API** | `chrome.storage.local` (Syncs domain snippets locally) |
+
+---
+
+## 🚀 Installation Guide
+
+### Developer Mode Installation (Unpacked Extension)
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/technicguy/live-css-js-tester.git
+   ```
+
+2. **Open Chrome Extensions Page:**
+   Open Google Chrome and navigate to:
+   ```text
+   chrome://extensions/
+   ```
+
+3. **Enable Developer Mode:**
+   Toggle on the **Developer mode** switch in the top-right corner of the Chrome page.
+
+4. **Load Unpacked Extension:**
+   - Click the **"Load unpacked"** button in the top left.
+   - Select the `live-css-js-tester` folder.
+
+5. **Pin to Toolbar:**
+   Click the puzzle piece icon in Chrome's top-right toolbar and click the pin icon next to **Live CSS & JS Tester**.
+
+---
+
+## 📖 How to Use
+
+### 1. Injecting Live CSS
+1. Navigate to any website (e.g., `https://example.com`).
+2. Click the **Live CSS & JS Tester** extension icon in your browser toolbar.
+3. Select the **CSS Tab**.
+4. Type your CSS rules:
+   ```css
+   body {
+     background-color: #0f141e !important;
+     color: #00fff2 !important;
+   }
+   ```
+5. Toggle **Pin CSS** to keep this style active even after page refreshes.
+
+### 2. Executing JavaScript
+1. Switch to the **JS Tab** in the extension popup.
+2. Enter your script:
+   ```javascript
+   console.log("DOM Loaded domain:", window.location.hostname);
+   document.querySelectorAll("a").forEach(el => el.style.border = "1px solid red");
+   ```
+3. Click **Run JS**. View live logs in the bottom console panel.
+
+---
+
+## 📂 Project File Structure
+
+```text
+live-css-js-tester/
+├── manifest.json      # Chrome Manifest V3 configuration & permission schema
+├── background.js      # Background service worker for state management & badges
+├── content.js         # Content script injected into web pages
+├── popup.html         # Extension popup interface structure
+├── popup.css          # Dark glassmorphism styling for popup editor
+├── popup.js           # Logic, tab switching, debouncing, & storage handling
+├── icons/             # App icons (16x16, 32x32, 48x48, 128x128)
+└── README.md          # Project documentation
+```
+
+---
+
+## 🔒 Permissions & Privacy
+
+- `activeTab` & `scripting`: Required to inject CSS and execute JS safely on the tab you interact with.
+- `storage`: Required to store your CSS/JS code snippets locally on your computer.
+- **Zero Remote Tracking:** No analytics or external network calls are made. All snippets stay 100% on your local browser storage.
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for details.
