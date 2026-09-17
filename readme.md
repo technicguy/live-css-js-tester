@@ -127,6 +127,23 @@ live-css-js-tester/
 
 ---
 
+## 🌐 Contact & Support
+
+For support, inquiries, or collaboration, feel free to reach out across any of these channels:
+
+- 📧 **Email:** [technicguy@gmail.com](mailto:technicguy@gmail.com)
+- 🌐 **Website:** [https://esanshar.com.np/](https://esanshar.com.np/)
+- 📞 **Phone:** [+977 986 445 0173](tel:+9779864450173)
+- 💬 **WhatsApp:** [+977 984 470 7950](https://wa.me/9779844707950)
+- 💼 **LinkedIn:** [linkedin.com/in/technicguy](https://www.linkedin.com/in/technicguy/)
+- 👤 **Facebook:** [facebook.com/imakashgc](https://www.facebook.com/imakashgc)
+
+### 📺 YouTube Channels
+- 🎵 **Sound & Frequency:** [Mystic Sound Journeys](https://www.youtube.com/@MysticSoundJourneys?sub_confirmation=1)
+- 👶 **Kids Content:** [MummaBaba](https://www.youtube.com/@MummaBaba?sub_confirmation=1)
+
+---
+
 ## 📄 License
 
 Distributed under the MIT License. See `LICENSE` for details.
