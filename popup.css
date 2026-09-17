@@ -1,0 +1,490 @@
+/* Enhanced CSS for Live CSS & JS Tester with Auto-Complete */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-size: 13px;
+    background: #f5f5f5;
+    width: 380px;
+    height: 500px;
+    overflow: hidden;
+}
+
+.container {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Make container draggable when detached */
+.container.floating {
+    position: fixed;
+    z-index: 10000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Drag Handle - Only this area should be draggable */
+.drag-handle {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 8px 12px;
+    cursor: move;
+    user-select: none;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    z-index: 1;
+}
+
+.drag-handle:hover {
+    background: linear-gradient(135deg, #5a67d8, #6b46c1);
+}
+
+.title {
+    font-weight: 600;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.url-info {
+    font-size: 11px;
+    opacity: 0.9;
+    margin-top: 2px;
+    pointer-events: none;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    background: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 13px;
+    color: #666;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab-btn:hover {
+    background: #e9ecef;
+    color: #333;
+}
+
+.tab-btn.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+    background: white;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    position: relative;
+}
+
+.tab-content.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox input {
+    margin: 0;
+}
+
+.buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.btn {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    background: #f8f9fa;
+    border-color: #bbb;
+}
+
+.btn.primary {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.btn.primary:hover {
+    background: #5a67d8;
+}
+
+/* Editor Section */
+.editor-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+}
+
+/* Auto-Complete Suggestions Container */
+.suggestions {
+    position: relative;
+    z-index: 100;
+}
+
+.autocomplete-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.autocomplete-dropdown {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.autocomplete-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-family: 'Courier New', Consolas, monospace;
+    font-size: 12px;
+    border-bottom: 1px solid #eee;
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover {
+    background-color: #f0f2ff;
+    color: #4c51bf;
+}
+
+.autocomplete-item.selected {
+    background-color: #667eea !important;
+    color: white !important;
+}
+
+/* Remove old CSS Properties select - Hidden */
+#cssProperties {
+    display: none;
+}
+
+/* Editor */
+#cssEditor,
+#jsEditor {
+    flex: 1;
+    min-height: 200px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    font-family: 'Courier New', Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    resize: none;
+    outline: none;
+    background: white;
+    transition: border-color 0.2s;
+    position: relative;
+    z-index: 1;
+}
+
+#cssEditor:focus,
+#jsEditor:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+/* Enhanced editor with syntax highlighting hints */
+#cssEditor {
+    color: #2d3748;
+}
+
+/* Stats */
+.stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #666;
+    padding: 4px 0;
+    border-top: 1px solid #eee;
+    margin-top: 4px;
+}
+
+/* Console */
+.console {
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #1a1a1a;
+    color: #ddd;
+    max-height: 100px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.console-header {
+    background: #2d2d2d;
+    padding: 6px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444;
+}
+
+.clear-btn {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 2px;
+    transition: all 0.2s;
+}
+
+.clear-btn:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.console-content {
+    padding: 6px 8px;
+    font-family: monospace;
+    font-size: 11px;
+    line-height: 1.3;
+    flex: 1;
+    overflow-y: auto;
+    max-height: 60px;
+}
+
+.console-log {
+    color: #4fc3f7;
+    margin: 2px 0;
+}
+
+.console-error {
+    color: #f48fb1;
+    margin: 2px 0;
+}
+
+.console-warn {
+    color: #ffb74d;
+    margin: 2px 0;
+}
+
+.console-info {
+    color: #81c784;
+    margin: 2px 0;
+}
+
+/* Status Bar */
+.status {
+    background: #f8f9fa;
+    border-top: 1px solid #ddd;
+    padding: 6px 12px;
+    font-size: 11px;
+    color: #666;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.status.success {
+    background: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.status.error {
+    background: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.status.warning {
+    background: #fff3cd;
+    color: #856404;
+    border-color: #ffeaa7;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+    transition: background 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Auto-complete scrollbar */
+.autocomplete-dropdown::-webkit-scrollbar {
+    width: 4px;
+}
+
+.autocomplete-dropdown::-webkit-scrollbar-track {
+    background: #f8f9fa;
+}
+
+.autocomplete-dropdown::-webkit-scrollbar-thumb {
+    background: #dee2e6;
+    border-radius: 2px;
+}
+
+/* Loading state for auto-complete */
+.autocomplete-loading {
+    padding: 12px;
+    text-align: center;
+    color: #666;
+    font-size: 11px;
+    font-style: italic;
+}
+
+/* No results state */
+.autocomplete-no-results {
+    padding: 12px;
+    text-align: center;
+    color: #999;
+    font-size: 11px;
+    font-style: italic;
+}
+
+/* Enhanced visual feedback */
+.autocomplete-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: transparent;
+    transition: background-color 0.2s;
+}
+
+.autocomplete-item:hover::after,
+.autocomplete-item.selected::after {
+    background: #667eea;
+}
+
+/* Responsive adjustments */
+@media (max-height: 400px) {
+    #cssEditor,
+    #jsEditor {
+        min-height: 150px;
+    }
+    
+    .console {
+        max-height: 80px;
+    }
+    
+    .console-content {
+        max-height: 50px;
+    }
+    
+    .autocomplete-dropdown {
+        max-height: 120px;
+    }
+}
+
+/* Focus management for accessibility */
+.autocomplete-item:focus {
+    outline: 2px solid #667eea;
+    outline-offset: -2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .autocomplete-dropdown {
+        border: 2px solid #000;
+    }
+    
+    .autocomplete-item.selected {
+        background-color: #000 !important;
+        color: #fff !important;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .autocomplete-dropdown {
+        animation: none;
+    }
+    
+    .autocomplete-item {
+        transition: none;
+    }
+}

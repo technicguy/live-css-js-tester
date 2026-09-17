@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live CSS & JS Tester</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container" id="container">
+        <!-- Drag Handle - Only draggable area -->
+        <div class="drag-handle" id="dragHandle">
+            <span class="title">Live CSS & JS Tester</span>
+            <div class="url-info" id="urlInfo">Loading...</div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="css">CSS</button>
+            <button class="tab-btn" data-tab="js">JavaScript</button>
+        </div>
+
+        <!-- CSS Tab -->
+        <div class="tab-content active" id="css-tab">
+            <div class="controls">
+                <label class="checkbox">
+                    <input type="checkbox" id="cssEnabled" checked>
+                    Live Apply
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" id="cssPinned">
+                    Pin Code
+                </label>
+                <div class="buttons">
+                    <button id="applyCss" class="btn primary">Apply</button>
+                    <button id="clearCss" class="btn">Clear</button>
+                </div>
+            </div>
+            
+            <div class="editor-section">
+                <!-- Enhanced Auto-Complete Container -->
+                <div class="suggestions">
+                    <!-- Old select element removed, replaced with autocomplete -->
+                    <select id="cssProperties" style="display: none;">
+                        <option value="">Legacy - Hidden</option>
+                    </select>
+                </div>
+                
+                <!-- CSS Editor with Auto-Complete -->
+                <textarea 
+                    id="cssEditor" 
+                    placeholder="/* Enter CSS code here - Type to see auto-complete suggestions */&#10;body { background: #f0f0f0; }"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocapitalize="off"
+                ></textarea>
+                
+                <div class="stats">
+                    <span id="cssLines">Lines: 1</span>
+                    <span id="cssChars">Chars: 0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- JavaScript Tab -->
+        <div class="tab-content" id="js-tab">
+            <div class="controls">
+                <label class="checkbox">
+                    <input type="checkbox" id="jsEnabled" checked>
+                    Live Execute
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" id="jsPinned">
+                    Pin Code
+                </label>
+                <div class="buttons">
+                    <button id="runJs" class="btn primary">Run</button>
+                    <button id="clearJs" class="btn">Clear</button>
+                </div>
+            </div>
+            
+            <div class="editor-section">
+                <textarea 
+                    id="jsEditor" 
+                    placeholder="// Enter JavaScript code here&#10;console.log('Hello World!');"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocapitalize="off"
+                ></textarea>
+                <div class="stats">
+                    <span id="jsLines">Lines: 1</span>
+                    <span id="jsChars">Chars: 0</span>
+                </div>
+            </div>
+            
+            <!-- Console Output -->
+            <div class="console" id="console">
+                <div class="console-header">
+                    Console <button id="clearConsole" class="clear-btn">Clear</button>
+                </div>
+                <div class="console-content" id="consoleContent"></div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status" id="status">Ready</div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Live CSS & JS Tester",
+  "version": "1.0.0",
+  "description": "A Chrome extension for live CSS and JavaScript testing with pin and auto-apply features",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Live CSS & JS Tester"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
